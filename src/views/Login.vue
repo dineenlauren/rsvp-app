@@ -1,7 +1,7 @@
 <template>
-  <div id="login">
+  <div id="login" class="container">
     <!-- LOGIN FORM -->
-    <div :class="{ 'signup-form': !showLoginForm }">
+    <div class="container" :class="{ 'signup-form': !showLoginForm }">
       <b-form v-if="showLoginForm" @submit.prevent>
         <h1>Login to RSVP</h1>
         <b-form-input
@@ -19,11 +19,11 @@
           placeholder="Password"
         ></b-form-input>
         <!-- <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p> -->
-        <b-button @click="login()" class="button">Log In</b-button>
+        <button @click="login()" class="router-btn">Log In</button>
         <div class="extras">
-          <b-button @click="toggleForm()" class="button"
-            >Create an Account</b-button
-          >
+          <button @click="toggleForm()">
+            Create an Account
+          </button>
         </div>
       </b-form>
 
@@ -147,3 +147,9 @@
     },
   };
 </script>
+<style scoped>
+  #login {
+    background-color: #d9857d;
+    height: 100%;
+  }
+</style>

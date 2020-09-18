@@ -43,10 +43,10 @@ const router = new VueRouter({
         import(/* webpackChunkName: "about" */ '../views/About.vue'),
     },
     {
-      path: '/party',
-      name: 'Party',
+      path: '/faqs',
+      name: 'FAQs',
       component: () =>
-        import(/* webpackChunkName: "party" */ '../views/Party.vue'),
+        import(/* webpackChunkName: "faqs" */ '../views/FAQs.vue'),
     },
     {
       path: '/registry',

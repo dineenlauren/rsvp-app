@@ -1,9 +1,9 @@
 <template>
-  <div class="faqs">
+  <div class="testing">
     <!-- PAGE TITLE -->
     <div class="container-fluid title-container ">
-      <h1>Frequently</h1>
-      <p class="title t-end">Asked Questions</p>
+      <h1 class="title">Wedding</h1>
+      <p class="subtitle t-end">FAQs</p>
     </div>
     <!-- DETAILS SECTION -->
     <div class="container t-center details-container">
@@ -35,7 +35,7 @@
 
 <script>
   export default {
-    name: 'FAQs',
+    name: 'Testing',
   };
 </script>
 
@@ -50,13 +50,6 @@
   }
   .details-container {
     color: rgb(110, 109, 109);
-  }
-  h1 {
-    border-bottom: 5px dotted white;
-    text-transform: uppercase;
-    font-family: sans-serif;
-    font-size: 2.2rem;
-    margin: auto;
   }
 
   .subheading {

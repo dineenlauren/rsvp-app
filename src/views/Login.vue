@@ -1,9 +1,13 @@
 <template>
-  <div id="login" class="container">
+  <div id="login">
+    <!-- PAGE TITLE -->
+    <div class="container">
+      <h1 class="title">Login</h1>
+      <p class="subtitle t-align-end">To RSVP</p>
+    </div>
     <!-- LOGIN FORM -->
     <div class="container" :class="{ 'signup-form': !showLoginForm }">
       <b-form v-if="showLoginForm" @submit.prevent>
-        <h1>Login to RSVP</h1>
         <b-form-input
           id="email1"
           v-model.trim="loginForm.email"
@@ -21,9 +25,9 @@
         <!-- <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p> -->
         <button @click="login()" class="router-btn">Log In</button>
         <div class="extras">
-          <button @click="toggleForm()">
+          <a type="button" @click="toggleForm()">
             Create an Account
-          </button>
+          </a>
         </div>
       </b-form>
 
@@ -151,5 +155,12 @@
   #login {
     background-color: #d9857d;
     height: 100%;
+  }
+
+  a {
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
   }
 </style>

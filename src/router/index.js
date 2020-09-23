@@ -43,10 +43,16 @@ const router = new VueRouter({
         import(/* webpackChunkName: "about" */ '../views/About.vue'),
     },
     {
-      path: '/faqs',
-      name: 'FAQs',
+      path: '/testing',
+      name: 'Testing',
       component: () =>
-        import(/* webpackChunkName: "faqs" */ '../views/FAQs.vue'),
+        import(/* webpackChunkName: "testing" */ '../views/Testing.vue'),
+    },
+    {
+      path: '/wedding',
+      name: 'Wedding',
+      component: () =>
+        import(/* webpackChunkName: "wedding" */ '../views/Wedding.vue'),
     },
     {
       path: '/registry',

@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <SiteNav />
+    <div class="body2">
+      <div id="nav">
+        <SiteNav />
+      </div>
+      <router-view class="content2" />
     </div>
-    <router-view />
   </div>
 </template>
 
@@ -18,36 +20,56 @@
 </script>
 
 <style>
-  /* .page-title {
-    margin: 40px 0 0;
-    font-size: 3rem;
-  } */
+  #app {
+    flex: 1 0 auto;
+    color: white;
+  }
+  #nav {
+    padding: 30px;
+  }
+  .body2 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .content2 {
+    flex: 1 0 auto;
+  }
   .rsvp-title {
     font-size: 4rem;
     margin: 40px 0 0 0;
   }
-  /* .message {
-    line-height: 2rem;
-  } */
-  #nav {
-    padding: 30px;
+
+  .title-container {
+    background-color: #d9857d;
+    color: white;
+    padding: 1rem;
   }
 
-  #app {
-    color: white;
+  .title {
+    border-bottom: 5px dotted white;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 3.2rem;
+  }
+  .subtitle {
+    font-size: 2rem;
+    margin: auto;
+    letter-spacing: 20px;
+    text-transform: uppercase;
   }
 
   .router-btn {
     color: white;
-    border: 3px solid white;
-    background-color: rgba(255, 255, 255, 0);
+    border: 2px solid white;
+    background-color: rgba(27, 27, 27, 0.233);
     padding: 0.5rem 3rem;
   }
 
   .router-btn:hover {
-    color: white;
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.294);
+    background-color: rgba(27, 27, 27, 0.466);
   }
 
   .t-center {
@@ -56,15 +78,19 @@
   .t-end {
     text-align: end;
   }
-  .title {
+  /* .title {
     font-size: 1.4rem;
     margin: auto;
-  }
+    letter-spacing: 20px;
+    text-transform: uppercase;
+  } */
 
   .subheading {
-    color: #d9857d;
-    font-size: 1rem;
-    font-variant: small-caps;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
   }
   /* TEMP STYLING */
   .red {

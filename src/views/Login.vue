@@ -2,8 +2,8 @@
   <div id="login">
     <!-- PAGE TITLE -->
     <div class="container">
-      <h1 class="title">Login</h1>
       <p class="subtitle t-align-end">To RSVP</p>
+      <h1 class="title">Login</h1>
     </div>
     <!-- LOGIN FORM -->
     <div class="container" :class="{ 'signup-form': !showLoginForm }">
@@ -22,7 +22,7 @@
           required
           placeholder="Password"
         ></b-form-input>
-        <!-- <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p> -->
+        <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p>
         <button @click="login()" class="router-btn">Log In</button>
         <div class="extras">
           <a type="button" @click="toggleForm()">
@@ -54,6 +54,7 @@
           ></b-form-input>
         </b-form-group>
 
+        <!-- GUEST FORM INPUT -->
         <b-form-group label-for="guest">
           <b-form-input
             id="guest"
@@ -61,9 +62,6 @@
             type="text"
             placeholder="Guest"
           ></b-form-input>
-        </b-form-group>
-
-        <b-form-group label-for="guestLast">
           <b-form-input
             id="guestLast"
             v-model="signupForm.guestLast"
@@ -91,7 +89,39 @@
             placeholder="Password"
           ></b-form-input>
         </b-form-group>
-        <!-- <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p> -->
+        <!-- <b-form-group>
+          <b-form-radio
+            v-model="signupForm.noGuest"
+            name="guest-radio"
+            value="false"
+            >Add additional guest</b-form-radio
+          ><b-form-radio
+            v-model="signupForm.noGuest"
+            name="no-guest-radio"
+            value="true"
+            >No Guest</b-form-radio
+          >
+        </b-form-group> -->
+        <b-form-checkbox
+          id="checkbox-guest"
+          v-model="signupForm.noGuest"
+          name="checkbox-guest"
+          value="true"
+          unchecked-value="false"
+        >
+          No +One
+        </b-form-checkbox>
+        <b-form-checkbox
+          id="checkbox-admin"
+          v-model="signupForm.isAdmin"
+          name="checkbox-admin"
+          value="true"
+          unchecked-value="false"
+        >
+          Is Admin
+        </b-form-checkbox>
+
+        <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p>
         <b-button @click="signup()" class="button">Sign Up</b-button>
         <div class="extras">
           <b-button @click="toggleForm()" class="button"
@@ -115,28 +145,33 @@
         signupForm: {
           name: '',
           nameLast: '',
-          guest: '',
-          guestLast: '',
+          guest: null,
+          guestLast: null,
           email: '',
           password: '',
+          noGuest: false,
+          isAdmin: false,
         },
         showLoginForm: true,
-        // errorMsg: '',
+        // showGuestForm: false,
+        errorMsg: '',
       };
     },
     methods: {
       toggleForm() {
         this.showLoginForm = !this.showLoginForm;
       },
+
       login() {
-        this.$store.dispatch('login', {
-          email: this.loginForm.email,
-          password: this.loginForm.password,
-        });
-        // .catch((err) => {
-        //   console.warn(err);
-        //   this.errorMsg = err.message;
-        // });
+        this.$store
+          .dispatch('login', {
+            email: this.loginForm.email,
+            password: this.loginForm.password,
+          })
+          .catch((err) => {
+            console.warn(err);
+            this.errorMsg = err.message;
+          });
       },
       signup() {
         this.$store.dispatch('signup', {
@@ -146,6 +181,8 @@
           guestLast: this.signupForm.guestLast,
           email: this.signupForm.email,
           password: this.signupForm.password,
+          noGuest: this.signupForm.noGuest,
+          isAdmin: this.signupForm.isAdmin,
         });
       },
     },
@@ -153,8 +190,11 @@
 </script>
 <style scoped>
   #login {
-    background-color: #d9857d;
+    background-color: #b73e00;
     height: 100%;
+  }
+  .container {
+    padding: 1rem;
   }
 
   a {
@@ -162,5 +202,8 @@
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.8rem;
+  }
+  input {
+    margin: 10px 0;
   }
 </style>

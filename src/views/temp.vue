@@ -25,6 +25,7 @@
           <p class="subheading">West Elm</p>
           <a v-bind:href="we" target="_blank">Shop this Registry</a>
         </b-col>
+        <b-col></b-col>
       </b-row>
     </b-container>
   </div>
@@ -47,7 +48,6 @@
 <style scoped>
   .registry {
     background-color: #e07245;
-    height: 100%;
   }
   .container {
     padding: 2rem;
@@ -57,20 +57,20 @@
   }
 
   .subheading {
-    color: white;
+    color: #d9857d;
     font-weight: 100;
     font-size: 1.7rem;
     margin: 0;
   }
   a {
-    color: #f7f89c;
+    color: rgb(148, 148, 148);
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.8rem;
   }
 
   .col-style {
-    border: 1px solid rgba(247, 248, 156, 0.685);
+    border: 1px solid rgba(0, 0, 0, 0.125);
     padding: 10px;
     margin: 10px;
   }

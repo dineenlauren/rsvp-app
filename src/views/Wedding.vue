@@ -2,8 +2,8 @@
   <div class="wedding">
     <!-- PAGE TITLE -->
     <div class="container">
-      <h1 class="title">Wedding</h1>
-      <p class="subtitle t-align-end">Timeline</p>
+      <p class="subtitle t-align-end">Wedding</p>
+      <h1 class="title">Timeline</h1>
     </div>
 
     <div class="timeline-container mb-5">
@@ -40,7 +40,7 @@
 
 <style scoped>
   .wedding {
-    color: black;
+    background-color: #b59668;
   }
 
   ul.timeline {
@@ -51,7 +51,7 @@
   /* Timeline Verticle Line */
   ul.timeline:before {
     content: ' ';
-    background: #000000;
+    background: white;
     display: inline-block;
     position: absolute;
     left: 27px;
@@ -69,11 +69,11 @@
   /* Timeline Circles */
   ul.timeline > li:before {
     content: ' ';
-    background: white;
+    background: #b59668;
     display: inline-block;
     position: absolute;
     border-radius: 50%;
-    border: 1px solid #000000;
+    border: 2px solid white;
     margin: 8px 0;
     left: 20px;
     width: 15px;
@@ -83,20 +83,13 @@
   .container {
     padding: 2rem;
   }
-  .title {
-    border-bottom: 5px dotted black;
-  }
+
   p {
     margin: 0;
   }
   .timeline-container {
     padding: 2rem;
   }
-  /* .title-container {
-    background-color: #d9857d;
-    color: white;
-    padding: 1rem;
-  } */
 
   .subheading {
     color: #d9857d;

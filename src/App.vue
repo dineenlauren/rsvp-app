@@ -35,10 +35,6 @@
   .content2 {
     flex: 1 0 auto;
   }
-  .rsvp-title {
-    font-size: 4rem;
-    margin: 40px 0 0 0;
-  }
 
   .title-container {
     background-color: #d9857d;
@@ -47,15 +43,16 @@
   }
 
   .title {
-    border-bottom: 5px dotted white;
     text-transform: uppercase;
     font-family: sans-serif;
     font-size: 3.2rem;
+    padding: 0;
   }
   .subtitle {
     font-size: 2rem;
-    margin: auto;
+    border-bottom: 5px dotted white;
     letter-spacing: 20px;
+    margin: 0;
     text-transform: uppercase;
   }
 

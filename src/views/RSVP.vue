@@ -1,16 +1,11 @@
 <template>
   <div class="rsvp">
-    <b-container>
+    <b-container class="section-container">
       <header class="page-header">
-        <Welcome
-          v-if="!userProfile.guest"
-          :rsvpTitle="userProfile.name"
-          msg="you have been cordially invited"
-        />
+        <Welcome v-if="!userProfile.guest" :rsvpTitle="userProfile.name" />
         <Welcome
           v-if="userProfile.guest"
           :rsvpTitle="userProfile.name + ' & ' + userProfile.guest"
-          msg="you have been cordially invited"
         />
       </header>
       <transition name="fade">
@@ -45,38 +40,39 @@
           </b-form-group>
         </div>
         <!-- TOGGLE GUEST INPUT FORM -->
-        <a
-          type="button"
-          @click="toggleForm"
+        <div
           v-if="!userProfile.noGuest && !userProfile.guest && !showGuestForm"
-          ><b-icon icon="chevron-double-right"></b-icon> Guest</a
         >
-        <a
-          type="button"
-          @click.prevent="removeGuest()"
-          v-else-if="!userProfile.noGuest && userProfile.guest"
-          ><b-icon icon="x-circle"></b-icon>Remove Guest</a
-        >
-        <a type="button" @click="toggleForm" v-else
-          ><b-icon icon="chevron-double-down"></b-icon> Guest</a
-        >
+          <a type="button" @click="toggleForm"
+            ><b-icon icon="chevron-double-right"></b-icon> Guest</a
+          >
+          <a
+            type="button"
+            @click.prevent="removeGuest()"
+            v-if="!userProfile.noGuest && userProfile.guest"
+            ><b-icon icon="x-circle"></b-icon>Remove Guest</a
+          >
+          <a type="button" @click="toggleForm" v-else
+            ><b-icon icon="chevron-double-down"></b-icon> Guest</a
+          >
 
-        <!-- ADD GUEST INFORMATION -->
-        <b-form v-if="showGuestForm" @submit.prevent="updateGuest()">
-          <b-form-group label="">
-            <b-form-input
-              id="guest"
-              v-model="addGuest.guest"
-              placeholder="First Name"
-            ></b-form-input>
-            <b-form-input
-              id="guestLast"
-              v-model="addGuest.guestLast"
-              placeholder="Last Name"
-            ></b-form-input>
-            <b-button type="submit" class="button">Add Guest</b-button>
-          </b-form-group>
-        </b-form>
+          <!-- ADD GUEST INFORMATION -->
+          <b-form v-if="showGuestForm" @submit.prevent="updateGuest()">
+            <b-form-group label="">
+              <b-form-input
+                id="guest"
+                v-model="addGuest.guest"
+                placeholder="First Name"
+              ></b-form-input>
+              <b-form-input
+                id="guestLast"
+                v-model="addGuest.guestLast"
+                placeholder="Last Name"
+              ></b-form-input>
+              <b-button type="submit" class="button">Add Guest</b-button>
+            </b-form-group>
+          </b-form>
+        </div>
 
         <b-button block type="submit" class="button">Submit</b-button>
       </b-form>
@@ -163,3 +159,17 @@
     },
   };
 </script>
+
+<style scoped>
+  .rsvp {
+    background-color: #d69d8b;
+  }
+
+  .container {
+    padding: 2rem;
+  }
+  .page-header {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+</style>

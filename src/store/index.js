@@ -39,6 +39,8 @@ const store = new Vuex.Store({
         guestLast: form.guestLast,
         status: null,
         status2: null,
+        noGuest: form.noGuest,
+        isAdmin: form.isAdmin,
       });
 
       dispatch('fetchUserProfile', user);
@@ -53,10 +55,11 @@ const store = new Vuex.Store({
 
       // change route to rsvp view
       if (router.currentRoute.path === '/login') {
-        router.push('/rsvp');
-      }
-      if (router.currentRoute.path === '/signup') {
-        router.push('/rsvp');
+        if (!userProfile.isAdmin) {
+          router.push('/rsvp');
+        } else {
+          router.push('/admin');
+        }
       }
     },
     // LOG USER OUT

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import RSVP from '../views/RSVP.vue';
+import Admin from '../views/Admin.vue';
 import { auth } from '../firebase';
 
 Vue.use(VueRouter);
@@ -10,6 +11,10 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '*',
+      redirect: '/',
+    },
     {
       path: '/',
       name: 'Home',
@@ -22,6 +27,15 @@ const router = new VueRouter({
       meta: {
         requiresAuth: true,
         title: 'RSVP',
+      },
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: Admin,
+      meta: {
+        requiresAuth: true,
+        title: 'Admin',
       },
     },
     {
@@ -75,19 +89,33 @@ const router = new VueRouter({
 // });
 
 //from rd-wedding
+// router.beforeEach((to, from, next) => {
+//   const currentUser = auth.currentUser;
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (!currentUser) {
+//       next({
+//         path: '/login',
+//       });
+//     } else {
+//       next();
+//     }
+//   } else {
+//     next();
+//   }
+// });
+
 router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
   const currentUser = auth.currentUser;
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!currentUser) {
-      next({
-        path: '/login',
-      });
-    } else {
-      next();
-    }
-  } else {
-    next(); // make sure to always call next()!
-  }
+
+  if (requiresAuth && !currentUser)
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath },
+    });
+  else if (!requiresAuth && currentUser) next();
+  else if (!requiresAuth && !currentUser) next();
+  else next();
 });
 
 export default router;

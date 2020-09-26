@@ -2,8 +2,8 @@
   <div class="about">
     <!-- PAGE TITLE -->
     <div class="container">
-      <h1 class="title">Wedding</h1>
-      <p class="subtitle t-align-end">Details</p>
+      <p class="subtitle t-align-end">Wedding</p>
+      <h1 class="title">Details</h1>
     </div>
     <!-- DETAILS SECTION -->
     <div class="container t-align-center">

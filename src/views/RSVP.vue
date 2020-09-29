@@ -8,12 +8,8 @@
           :rsvpTitle="userProfile.name + ' & ' + userProfile.guest"
         />
       </header>
-      <transition name="fade">
-        <p v-if="showSuccess" class="success">RSVP Updated</p>
-      </transition>
 
       <!-- Update RSVP Status -->
-
       <b-form @submit.prevent="updateProfile()">
         <b-form-group
           :label="userProfile.name + ' ' + userProfile.nameLast + ':'"
@@ -28,8 +24,17 @@
         </b-form-group>
         <div v-if="userProfile.guest">
           <b-form-group
-            :label="userProfile.guest + ' ' + userProfile.guestLast + ':'"
-          >
+            ><a
+              v-if="userProfile.guest"
+              type="button"
+              @click="removeGuest"
+              id="tooltip-1"
+            >
+              <b-icon icon="x-circle"></b-icon> </a
+            ><b-tooltip target="tooltip-1" triggers="hover">
+              Remove Guest
+            </b-tooltip>
+            {{ userProfile.guest }} {{ userProfile.guestLast }}:
             <b-form-select
               id="status"
               v-model="userProfile.status2"
@@ -40,42 +45,41 @@
           </b-form-group>
         </div>
         <!-- TOGGLE GUEST INPUT FORM -->
-        <div
-          v-if="!userProfile.noGuest && !userProfile.guest && !showGuestForm"
-        >
-          <a type="button" @click="toggleForm"
-            ><b-icon icon="chevron-double-right"></b-icon> Guest</a
-          >
-          <a
-            type="button"
-            @click.prevent="removeGuest()"
-            v-if="!userProfile.noGuest && userProfile.guest"
-            ><b-icon icon="x-circle"></b-icon>Remove Guest</a
-          >
-          <a type="button" @click="toggleForm" v-else
-            ><b-icon icon="chevron-double-down"></b-icon> Guest</a
+        <div v-if="!userProfile.noGuest && !userProfile.guest">
+          <a v-if="!showGuestForm" type="button" @click="toggleForm">
+            <b-icon icon="plus-circle-fill"></b-icon> Guest</a
           >
 
-          <!-- ADD GUEST INFORMATION -->
-          <b-form v-if="showGuestForm" @submit.prevent="updateGuest()">
-            <b-form-group label="">
-              <b-form-input
-                id="guest"
-                v-model="addGuest.guest"
-                placeholder="First Name"
-              ></b-form-input>
-              <b-form-input
-                id="guestLast"
-                v-model="addGuest.guestLast"
-                placeholder="Last Name"
-              ></b-form-input>
-              <b-button type="submit" class="button">Add Guest</b-button>
-            </b-form-group>
-          </b-form>
+          <a v-if="showGuestForm" type="button" @click="toggleForm"
+            ><b-icon icon="dash-circle"></b-icon> Guest</a
+          >
+          <b-form-group v-if="showGuestForm" class="guestForm">
+            <b-form-input
+              id="guest"
+              v-model="addGuest.guest"
+              placeholder="First Name"
+            ></b-form-input>
+            <b-form-input
+              id="guestLast"
+              v-model="addGuest.guestLast"
+              placeholder="Last Name"
+            ></b-form-input>
+            <button @click.prevent="updateGuest()">
+              <b-icon icon="plus-circle-fill"></b-icon>
+              Add
+            </button>
+          </b-form-group>
         </div>
-
-        <b-button block type="submit" class="button">Submit</b-button>
+        <b-button block type="submit" class="button">Submit RSVP</b-button>
       </b-form>
+
+      <!-- Success Message -->
+      <transition name="fade">
+        <p v-if="showSuccess" class="success t-center">
+          Thank you. Your RSVP has been updated.
+        </p>
+        <!-- <p class="success t-center">Thank you. Your RSVP has been updated.</p> -->
+      </transition>
     </b-container>
   </div>
 </template>
@@ -88,6 +92,9 @@
     BIconChevronDoubleRight,
     BIconChevronDoubleDown,
     BIconXCircle,
+    BIconPlusCircle,
+    BIconPlusCircleFill,
+    BIconDashCircle,
   } from 'bootstrap-vue';
 
   export default {
@@ -98,6 +105,9 @@
       BIconChevronDoubleRight,
       BIconChevronDoubleDown,
       BIconXCircle,
+      BIconPlusCircle,
+      BIconPlusCircleFill,
+      BIconDashCircle,
     },
 
     data() {
@@ -136,7 +146,7 @@
         this.showGuestForm = false;
       },
       removeGuest() {
-        this.$store.dispatch('removeGuest', {
+        this.$store.dispatch('updateGuest', {
           guest: '',
           guestLast: '',
           status2: null,
@@ -154,7 +164,7 @@
 
         setTimeout(() => {
           this.showSuccess = false;
-        }, 2000);
+        }, 3000);
       },
     },
   };
@@ -171,5 +181,27 @@
   .page-header {
     margin-bottom: 20px;
     padding-bottom: 20px;
+  }
+  .success {
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+  .button {
+    margin-top: 1rem;
+  }
+  .guestForm {
+    margin-top: 1rem;
+  }
+
+  .guestForm button {
+    color: white;
+    /* background-color: #a4841b; */
+    /* background-color: #b73e00; */
+    /* background-color: #4c181d; */
+    /* background-color: #bf5650; */
+    background-color: #e17534;
+    border: 2px solid white;
+    border-radius: 0.25rem;
+    margin-top: 0.5rem;
   }
 </style>

@@ -91,17 +91,6 @@ const store = new Vuex.Store({
       dispatch('fetchUserProfile', { uid: userId });
     },
 
-    async removeGuest({ dispatch }, user) {
-      const userId = fb.auth.currentUser.uid;
-      // update user object
-      await fb.usersCollection.doc(userId).update({
-        guest: user.guest,
-        guestLast: user.guestLast,
-      });
-
-      dispatch('fetchUserProfile', { uid: userId });
-    },
-
     // end
   },
   modules: {},

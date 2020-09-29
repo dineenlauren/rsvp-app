@@ -57,10 +57,10 @@ const router = new VueRouter({
         import(/* webpackChunkName: "about" */ '../views/About.vue'),
     },
     {
-      path: '/testing',
-      name: 'Testing',
+      path: '/temp',
+      name: 'temp',
       component: () =>
-        import(/* webpackChunkName: "testing" */ '../views/Testing.vue'),
+        import(/* webpackChunkName: "testing" */ '../views/temp.vue'),
     },
     {
       path: '/wedding',

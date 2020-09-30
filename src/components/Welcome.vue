@@ -1,7 +1,11 @@
 <template>
-  <div class="welcome">
-    <h1 class="rsvp-title">{{ rsvpTitle }}</h1>
-    <h1 class="message">you have been cordially invited</h1>
+  <div class="container">
+    <b-row class="justify-content-md-center">
+      <b-col lg="7">
+        <p class="subtitle t-align-end">{{ subTitle }}</p>
+        <h1 class="title">{{ title }}</h1>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -9,8 +13,8 @@
   export default {
     name: 'Welcome',
     props: {
-      msg: String,
-      rsvpTitle: String,
+      title: String,
+      subTitle: String,
     },
   };
 </script>
@@ -27,5 +31,8 @@
     line-height: 2rem;
     font-size: 2rem;
     font-family: sans-serif;
+  }
+  div.col-lg-7 {
+    padding: 1rem;
   }
 </style>

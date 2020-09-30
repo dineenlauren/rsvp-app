@@ -1,12 +1,11 @@
 <template>
   <div class="wedding">
     <!-- PAGE TITLE -->
-    <div class="container">
-      <p class="subtitle t-align-end">Wedding</p>
-      <h1 class="title">Timeline</h1>
-    </div>
+    <header>
+      <Welcome :subTitle="subTitle" :title="title" />
+    </header>
 
-    <div class="timeline-container mb-5">
+    <b-container class="mb-5">
       <div class="row">
         <div class="col-md-6 offset-md-3 mb-4">
           <p>September 8th 2019</p>
@@ -28,13 +27,22 @@
           </ul>
         </div>
       </div>
-    </div>
+    </b-container>
   </div>
 </template>
 
 <script>
+  import Welcome from '../components/Welcome';
+
   export default {
     name: 'Wedding',
+    components: { Welcome },
+    data() {
+      return {
+        subTitle: 'Wedding',
+        title: 'Timeline',
+      };
+    },
   };
 </script>
 
@@ -79,35 +87,5 @@
     width: 15px;
     height: 15px;
     z-index: 400;
-  }
-  .container {
-    padding: 2rem;
-  }
-
-  p {
-    margin: 0;
-  }
-  .timeline-container {
-    padding: 2rem;
-  }
-
-  .subheading {
-    color: #d9857d;
-  }
-
-  @media (min-width: 768px) {
-    /* h1 {
-      font-size: 2.4rem;
-      margin: auto;
-      width: 60%;
-    }
-    .title {
-      font-size: 1.4rem;
-      margin: auto;
-      width: 60%;
-    }
-    .title-container {
-      padding: 1rem;
-    } */
   }
 </style>

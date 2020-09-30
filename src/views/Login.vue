@@ -191,10 +191,6 @@
 <style scoped>
   #login {
     background-color: #b73e00;
-    height: 100%;
-  }
-  .container {
-    padding: 1rem;
   }
 
   a {

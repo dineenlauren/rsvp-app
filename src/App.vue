@@ -23,10 +23,12 @@
   #app {
     flex: 1 0 auto;
     color: white;
+    font-size: 1.3rem;
   }
   #nav {
     padding: 30px;
   }
+
   .body2 {
     display: flex;
     flex-direction: column;
@@ -35,7 +37,12 @@
   .content2 {
     flex: 1 0 auto;
   }
-
+  .container {
+    padding: 2rem;
+  }
+  p {
+    margin: 0 !important;
+  }
   .title-container {
     background-color: #d9857d;
     color: white;
@@ -75,28 +82,26 @@
   .t-end {
     text-align: end;
   }
-  /* .title {
-    font-size: 1.4rem;
-    margin: auto;
-    letter-spacing: 20px;
-    text-transform: uppercase;
-  } */
 
   .subheading {
     color: #ffffff;
     font-weight: 700;
     letter-spacing: 2px;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 70%;
+    }
   }
   /* TEMP STYLING */
   .red {
     background-color: rgba(255, 0, 0, 0.411);
   }
   .red-outline {
-    border: 1px solid red;
+    border: 2px solid red;
   }
-
   .blue {
     background-color: rgba(0, 0, 255, 0.4115);
   }

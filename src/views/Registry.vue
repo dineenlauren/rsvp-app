@@ -1,29 +1,53 @@
 <template>
   <div class="registry">
     <!-- PAGE TITLE -->
-    <div class="container">
-      <p class="subtitle t-align-end">Wedding</p>
-      <h1 class="title">Registry</h1>
-    </div>
+    <header>
+      <Welcome :subTitle="subTitle" :title="title" />
+    </header>
     <!-- DETAILS SECTION -->
-    <b-container fluid class="t-center">
-      <b-row class="justify-content-center">
-        <b-col sm="4" class="col-style">
-          <p class="subheading">Crate &amp; Barrel</p>
-          <a v-bind:href="cb" target="_blank">Shop this Registry</a>
+    <b-container class="t-center">
+      <b-row class="justify-content-md-center">
+        <b-col
+          md="4"
+          type="button"
+          v-bind:href="cb"
+          target="_blank"
+          class="col-style"
+        >
+          <h1 class="subheading">Crate &amp; Barrel</h1>
+          <p>Shop this Registry</p>
         </b-col>
-        <b-col sm="4" class="col-style">
-          <p class="subheading">Z O L A</p>
-          <a v-bind:href="zola" target="_blank">Shop this Registry</a>
+        <b-col
+          md="4"
+          type="button"
+          v-bind:href="zola"
+          target="_blank"
+          class="col-style"
+        >
+          <h1 class="subheading">Z O L A</h1>
+          <p>Shop this Registry</p>
         </b-col>
-
-        <b-col sm="4" class="col-style">
-          <p class="subheading">Amazon</p>
-          <a v-bind:href="amazon" target="_blank">Shop this Registry</a>
+      </b-row>
+      <b-row class="justify-content-md-center">
+        <b-col
+          md="4"
+          type="button"
+          v-bind:href="amazon"
+          target="_blank"
+          class="col-style"
+        >
+          <h1 class="subheading">Amazon</h1>
+          <p>Shop this Registry</p>
         </b-col>
-        <b-col sm="4" class="col-style">
-          <p class="subheading">West Elm</p>
-          <a v-bind:href="we" target="_blank">Shop this Registry</a>
+        <b-col
+          md="4"
+          type="button"
+          v-bind:href="we"
+          target="_blank"
+          class="col-style"
+        >
+          <h1 class="subheading">West Elm</h1>
+          <p>Shop this Registry</p>
         </b-col>
       </b-row>
     </b-container>
@@ -31,14 +55,18 @@
 </template>
 
 <script>
+  import Welcome from '../components/Welcome';
   export default {
     name: 'FAQs',
+    components: { Welcome },
     data() {
       return {
         cb: 'https://www.crateandbarrel.com/gift-registry/#',
         zola: 'https://www.zola.com/registry/#',
         amazon: 'https://www.amazon.com/wedding/home/#',
         we: 'https://www.westelm.com/registry/#',
+        subTitle: 'Wedding',
+        title: 'Registry',
       };
     },
   };
@@ -47,47 +75,31 @@
 <style scoped>
   .registry {
     background-color: #e07245;
-    height: 100%;
-  }
-  .container {
-    padding: 2rem;
-  }
-  p {
-    margin: 0;
   }
 
-  .subheading {
-    color: white;
-    font-weight: 100;
-    font-size: 1.7rem;
-    margin: 0;
-  }
-  a {
+  p {
     color: #f7f89c;
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 0.8rem;
   }
 
+  .subheading {
+    font-weight: 200;
+    font-size: 1.5rem;
+  }
   .col-style {
-    border: 1px solid rgba(247, 248, 156, 0.685);
-    padding: 10px;
-    margin: 10px;
+    border: 2px solid rgba(247, 248, 156, 0.685);
+    padding: 2rem 1rem;
+    margin: 1rem;
   }
-
-  @media (min-width: 768px) {
-    /* h1 {
-      font-size: 2.4rem;
-      margin: auto;
-      width: 60%;
-    }
-    .title {
-      font-size: 1.4rem;
-      margin: auto;
-      width: 60%;
-    }
-    .title-container {
-      padding: 1rem;
-    } */
+  .col-style:hover {
+    text-decoration: none;
+    background-color: rgba(247, 248, 156);
+  }
+  .col-style:hover > .subheading {
+    color: #e07245;
+  }
+  .col-style:hover > p {
+    color: #909456;
   }
 </style>

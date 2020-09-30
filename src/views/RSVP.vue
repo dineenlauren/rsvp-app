@@ -1,98 +1,116 @@
 <template>
   <div class="rsvp">
-    <b-container class="section-container">
-      <header class="page-header">
-        <Welcome v-if="!userProfile.guest" :rsvpTitle="userProfile.name" />
-        <Welcome
-          v-if="userProfile.guest"
-          :rsvpTitle="userProfile.name + ' & ' + userProfile.guest"
-        />
-      </header>
+    <!-- PAGE TITLE -->
+    <!-- <div class="container t-center">
+      <h1 v-if="!userProfile.guest" class="title">
+        {{ userProfile.name }}
+      </h1>
+      <h1 v-if="userProfile.guest" class="title">
+        {{ userProfile.name }} & {{ userProfile.guest }}
+      </h1>
+      <h1 class="subtitle">you have been cordially invited</h1>
+    </div> -->
 
+    <header>
+      <Welcome
+        v-if="!userProfile.guest"
+        :title="userProfile.name"
+        :subTitle="subTitle"
+      />
+      <Welcome
+        v-if="userProfile.guest"
+        :title="userProfile.name + ' & ' + userProfile.guest"
+        :subTitle="subTitle"
+      />
+    </header>
+
+    <b-container>
       <!-- Update RSVP Status -->
-      <b-form @submit.prevent="updateProfile()">
-        <b-form-group
-          :label="userProfile.name + ' ' + userProfile.nameLast + ':'"
-        >
-          <b-form-select
-            id="status"
-            v-model="userProfile.status"
-            :options="options"
-            required
-          >
-          </b-form-select>
-        </b-form-group>
-        <div v-if="userProfile.guest">
-          <b-form-group
-            ><a
-              v-if="userProfile.guest"
-              type="button"
-              @click="removeGuest"
-              id="tooltip-1"
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <b-form @submit.prevent="updateProfile()">
+            <b-form-group
+              :label="userProfile.name + ' ' + userProfile.nameLast + ':'"
             >
-              <b-icon icon="x-circle"></b-icon> </a
-            ><b-tooltip target="tooltip-1" triggers="hover">
-              Remove Guest
-            </b-tooltip>
-            {{ userProfile.guest }} {{ userProfile.guestLast }}:
-            <b-form-select
-              id="status"
-              v-model="userProfile.status2"
-              :options="options"
-              required
-            >
-            </b-form-select>
-          </b-form-group>
-        </div>
-        <!-- TOGGLE GUEST INPUT FORM -->
-        <div v-if="!userProfile.noGuest && !userProfile.guest">
-          <a v-if="!showGuestForm" type="button" @click="toggleForm">
-            <b-icon icon="plus-circle-fill"></b-icon> Guest</a
-          >
+              <b-form-select
+                id="status"
+                v-model="userProfile.status"
+                :options="options"
+                required
+              >
+              </b-form-select>
+            </b-form-group>
+            <div v-if="userProfile.guest">
+              <b-form-group
+                ><a
+                  v-if="userProfile.guest"
+                  type="button"
+                  @click="removeGuest"
+                  id="tooltip-1"
+                >
+                  <b-icon icon="x-circle"></b-icon> </a
+                ><b-tooltip target="tooltip-1" triggers="hover">
+                  Remove Guest
+                </b-tooltip>
+                {{ userProfile.guest }} {{ userProfile.guestLast }}:
+                <b-form-select
+                  id="status"
+                  v-model="userProfile.status2"
+                  :options="options"
+                  required
+                >
+                </b-form-select>
+              </b-form-group>
+            </div>
+            <!-- TOGGLE GUEST INPUT FORM -->
+            <div v-if="!userProfile.noGuest && !userProfile.guest">
+              <a v-if="!showGuestForm" type="button" @click="toggleForm">
+                <b-icon icon="plus-circle-fill"></b-icon> Guest</a
+              >
 
-          <a v-if="showGuestForm" type="button" @click="toggleForm"
-            ><b-icon icon="dash-circle"></b-icon> Guest</a
-          >
-          <b-form-group v-if="showGuestForm" class="guestForm">
-            <b-form-input
-              id="guest"
-              v-model="addGuest.guest"
-              placeholder="First Name"
-            ></b-form-input>
-            <b-form-input
-              id="guestLast"
-              v-model="addGuest.guestLast"
-              placeholder="Last Name"
-            ></b-form-input>
-            <button @click.prevent="updateGuest()">
-              <b-icon icon="plus-circle-fill"></b-icon>
-              Add
+              <a v-if="showGuestForm" type="button" @click="toggleForm"
+                ><b-icon icon="dash-circle"></b-icon> Guest</a
+              >
+              <b-form-group v-if="showGuestForm" class="guestForm">
+                <b-form-input
+                  id="guest"
+                  v-model="addGuest.guest"
+                  placeholder="First Name"
+                ></b-form-input>
+                <b-form-input
+                  id="guestLast"
+                  v-model="addGuest.guestLast"
+                  placeholder="Last Name"
+                ></b-form-input>
+                <button @click.prevent="updateGuest()">
+                  <b-icon icon="plus-circle-fill"></b-icon>
+                  Add
+                </button>
+              </b-form-group>
+            </div>
+            <button block type="submit" class="btn btn-secondary">
+              Submit RSVP
             </button>
-          </b-form-group>
+          </b-form>
         </div>
-        <b-button block type="submit" class="button">Submit RSVP</b-button>
-      </b-form>
-
+      </div>
       <!-- Success Message -->
       <transition name="fade">
         <p v-if="showSuccess" class="success t-center">
           Thank you. Your RSVP has been updated.
         </p>
-        <!-- <p class="success t-center">Thank you. Your RSVP has been updated.</p> -->
       </transition>
+      <a type="button" class="btn" @click="logout()">Logout</a>
     </b-container>
   </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex';
   import Welcome from '../components/Welcome';
+  import { mapState } from 'vuex';
   import {
     BIcon,
-    BIconChevronDoubleRight,
-    BIconChevronDoubleDown,
     BIconXCircle,
-    BIconPlusCircle,
     BIconPlusCircleFill,
     BIconDashCircle,
   } from 'bootstrap-vue';
@@ -102,10 +120,7 @@
     components: {
       Welcome,
       BIcon,
-      BIconChevronDoubleRight,
-      BIconChevronDoubleDown,
       BIconXCircle,
-      BIconPlusCircle,
       BIconPlusCircleFill,
       BIconDashCircle,
     },
@@ -122,6 +137,7 @@
           guest: '',
           guestLast: '',
         },
+        subTitle: 'you have been cordially invited',
         options: [
           { text: 'Select One', value: null, disabled: true },
           'Attending',
@@ -137,6 +153,9 @@
     methods: {
       toggleForm() {
         this.showGuestForm = !this.showGuestForm;
+      },
+      logout() {
+        this.$store.dispatch('logout');
       },
       updateGuest() {
         this.$store.dispatch('updateGuest', {
@@ -174,9 +193,17 @@
   .rsvp {
     background-color: #d69d8b;
   }
-
-  .container {
-    padding: 2rem;
+  .title {
+    font-size: 3rem;
+    margin: 0;
+    font-family: sans-serif;
+    border-bottom: 5px dotted white;
+  }
+  .subtitle {
+    color: rgba(255, 255, 255, 0.814);
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+    border-bottom: none;
   }
   .page-header {
     margin-bottom: 20px;
@@ -186,8 +213,9 @@
     font-size: 1.5rem;
     padding: 1rem;
   }
-  .button {
+  .btn {
     margin-top: 1rem;
+    width: 100%;
   }
   .guestForm {
     margin-top: 1rem;
@@ -195,13 +223,13 @@
 
   .guestForm button {
     color: white;
-    /* background-color: #a4841b; */
-    /* background-color: #b73e00; */
-    /* background-color: #4c181d; */
-    /* background-color: #bf5650; */
     background-color: #e17534;
     border: 2px solid white;
     border-radius: 0.25rem;
     margin-top: 0.5rem;
+  }
+  a.btn {
+    color: white;
+    margin-top: 1rem;
   }
 </style>

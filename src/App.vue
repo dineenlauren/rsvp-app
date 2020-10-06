@@ -49,7 +49,7 @@
     padding: 1rem;
   }
 
-  .title {
+  /* .title {
     text-transform: uppercase;
     font-family: sans-serif;
     font-size: 3.2rem;
@@ -61,7 +61,7 @@
     letter-spacing: 20px;
     margin: 0;
     text-transform: uppercase;
-  }
+  } */
 
   .router-btn {
     color: white;
@@ -74,6 +74,19 @@
     color: rgb(255, 255, 255);
     text-decoration: none;
     background-color: rgba(27, 27, 27, 0.466);
+  }
+  a.btn {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 0;
+  }
+  a.btn:hover {
+    color: white;
+  }
+  form {
+    max-width: 400px;
   }
 
   .t-center {

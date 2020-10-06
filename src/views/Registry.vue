@@ -8,7 +8,7 @@
     <b-container class="t-center">
       <b-row class="justify-content-md-center">
         <b-col
-          md="4"
+          lg="7"
           type="button"
           v-bind:href="cb"
           target="_blank"
@@ -18,7 +18,7 @@
           <p>Shop this Registry</p>
         </b-col>
         <b-col
-          md="4"
+          lg="7"
           type="button"
           v-bind:href="zola"
           target="_blank"
@@ -30,7 +30,7 @@
       </b-row>
       <b-row class="justify-content-md-center">
         <b-col
-          md="4"
+          lg="7"
           type="button"
           v-bind:href="amazon"
           target="_blank"
@@ -40,7 +40,7 @@
           <p>Shop this Registry</p>
         </b-col>
         <b-col
-          md="4"
+          lg="7"
           type="button"
           v-bind:href="we"
           target="_blank"
@@ -57,7 +57,7 @@
 <script>
   import Welcome from '../components/Welcome';
   export default {
-    name: 'FAQs',
+    name: 'Registry',
     components: { Welcome },
     data() {
       return {
@@ -74,32 +74,33 @@
 
 <style scoped>
   .registry {
-    background-color: #e07245;
+    background-color: #d09425;
   }
 
   p {
-    color: #f7f89c;
+    color: #d0591c;
     font-weight: 600;
     text-transform: uppercase;
   }
 
   .subheading {
     font-weight: 200;
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   .col-style {
-    border: 2px solid rgba(247, 248, 156, 0.685);
+    border: 2px solid white;
+    background-color: #e2b941;
     padding: 2rem 1rem;
     margin: 1rem;
   }
   .col-style:hover {
     text-decoration: none;
-    background-color: rgba(247, 248, 156);
+    background-color: #d0591c;
   }
   .col-style:hover > .subheading {
-    color: #e07245;
+    color: white;
   }
   .col-style:hover > p {
-    color: #909456;
+    color: #ffd558;
   }
 </style>

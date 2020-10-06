@@ -19,10 +19,7 @@
 
 <style scoped>
   .home {
-    background: linear-gradient(
-        rgba(255, 255, 255, 0.2),
-        rgba(255, 255, 255, 0.2)
-      ),
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2)),
       url('../assets/background.jpg');
     background-position: center;
     background-repeat: no-repeat;

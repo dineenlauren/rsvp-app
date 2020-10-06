@@ -1,49 +1,119 @@
 <template>
-  <div class="temp">
-    <b-container class="purple">
-      <b-row class="red justify-content-md-start">
-        <b-col cols="7" class="blue-outline"
-          ><p class="subheading">When</p>
-          <p>September 8th, 2019</p>
-          <p>4:00pm</p></b-col
-        >
-        <b-col cols="7" class="blue-outline"
-          ><p class="subheading">When</p>
-          <p>September 8th, 2019</p>
-          <p>4:00pm</p></b-col
-        >
-        <b-col cols="7" class="blue-outline"
-          ><p class="subheading">Parking</p>
-          <p>
-            While there will be parking available at the venue, no overnight
-            parking will be allowed. We recommend using ride share or taxi
-            services.
-          </p></b-col
-        >
-        <b-col cols="7" class="blue-outline"
-          ><p class="subheading">Dress Code</p>
-          <p>
-            Semi-formal. You do not need to wear a tie, a suite jacket, heels or
-            a dress if you do not wish to do so. But we do ask to dress in a way
-            that is appropriate.
-          </p></b-col
-        >
-      </b-row>
-      <b-row class="red">
-        <b-col cols="7" class="blue-outline">I'm a Map</b-col>
+  <div class="about">
+    <!-- PAGE TITLE -->
+    <header>
+      <Welcome :subTitle="subTitle" :title="title" />
+    </header>
+    <!-- DETAILS SECTION -->
+    <b-container>
+      <b-row class="justify-content-md-center">
+        <b-col lg="7">
+          <b-form v-if="showLoginForm" @submit.prevent>
+            <b-row cols="1">
+              <b-col class="mb-2">
+                <b-form-input
+                  id="email1"
+                  v-model.trim="loginForm.email"
+                  type="text"
+                  required
+                  placeholder="Username"
+                ></b-form-input>
+              </b-col>
+              <b-col>
+                <b-form-input
+                  id="password1"
+                  v-model.trim="loginForm.password"
+                  type="password"
+                  required
+                  placeholder="Password"
+                ></b-form-input>
+              </b-col>
+
+              <b-col class="mt-3"
+                ><p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p>
+                <button @click="login()" class="router-btn">Log In</button>
+                <div>
+                  <a type="button" class="btn" @click="toggleForm()">
+                    Create an Account
+                  </a>
+                </div>
+              </b-col>
+            </b-row>
+          </b-form>
+        </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
 
 <script>
+  import Welcome from '../components/Welcome';
+
   export default {
-    name: 'temp',
+    name: 'Temp',
+    components: { Welcome },
+    data() {
+      return {
+        loginForm: {
+          email: '',
+          password: '',
+        },
+        signupForm: {
+          name: '',
+          nameLast: '',
+          guest: null,
+          guestLast: null,
+          email: '',
+          password: '',
+          noGuest: false,
+          isAdmin: false,
+        },
+        showLoginForm: true,
+        subTitle: 'To RSVP',
+        title: 'Login',
+        errorMsg: '',
+      };
+    },
+    methods: {
+      toggleForm() {
+        this.showLoginForm = !this.showLoginForm;
+      },
+
+      login() {
+        this.$store
+          .dispatch('login', {
+            email: this.loginForm.email,
+            password: this.loginForm.password,
+          })
+          .catch((err) => {
+            console.warn(err);
+            this.errorMsg = err.message;
+          });
+      },
+      signup() {
+        this.$store.dispatch('signup', {
+          name: this.signupForm.name,
+          nameLast: this.signupForm.nameLast,
+          guest: this.signupForm.guest,
+          guestLast: this.signupForm.guestLast,
+          email: this.signupForm.email,
+          password: this.signupForm.password,
+          noGuest: this.signupForm.noGuest,
+          isAdmin: this.signupForm.isAdmin,
+        });
+      },
+    },
   };
 </script>
 
 <style scoped>
-  .temp {
-    color: black;
+  .about {
+    background-color: #bf5650;
+  }
+  div.col-lg-7 {
+    padding: 1rem;
+  }
+  form {
+    max-width: 75%;
   }
 </style>

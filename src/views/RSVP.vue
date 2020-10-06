@@ -1,33 +1,24 @@
 <template>
   <div class="rsvp">
     <!-- PAGE TITLE -->
-    <!-- <div class="container t-center">
-      <h1 v-if="!userProfile.guest" class="title">
-        {{ userProfile.name }}
-      </h1>
-      <h1 v-if="userProfile.guest" class="title">
-        {{ userProfile.name }} & {{ userProfile.guest }}
-      </h1>
-      <h1 class="subtitle">you have been cordially invited</h1>
-    </div> -->
-
-    <header>
-      <Welcome
-        v-if="!userProfile.guest"
-        :title="userProfile.name"
-        :subTitle="subTitle"
-      />
-      <Welcome
-        v-if="userProfile.guest"
-        :title="userProfile.name + ' & ' + userProfile.guest"
-        :subTitle="subTitle"
-      />
-    </header>
+    <b-container>
+      <b-row class="justify-content-md-center welcome">
+        <b-col lg="7">
+          <p class="subtitle t-align-end">{{ subTitle }}</p>
+          <h1 v-if="!userProfile.guest" class="title">
+            {{ userProfile.name }}
+          </h1>
+          <h1 v-else class="title">
+            {{ userProfile.name }} & {{ userProfile.guest }}
+          </h1>
+        </b-col>
+      </b-row>
+    </b-container>
 
     <b-container>
       <!-- Update RSVP Status -->
-      <div class="row">
-        <div class="col-md-8 offset-md-2">
+      <b-row class="justify-content-md-center">
+        <b-col lg="7">
           <b-form @submit.prevent="updateProfile()">
             <b-form-group
               :label="userProfile.name + ' ' + userProfile.nameLast + ':'"
@@ -91,16 +82,20 @@
             <button block type="submit" class="btn btn-secondary">
               Submit RSVP
             </button>
+            <div>
+              <a type="button" class="btn" @click="logout()">
+                Logout
+              </a>
+            </div>
           </b-form>
-        </div>
-      </div>
+        </b-col>
+      </b-row>
       <!-- Success Message -->
       <transition name="fade">
         <p v-if="showSuccess" class="success t-center">
           Thank you. Your RSVP has been updated.
         </p>
       </transition>
-      <a type="button" class="btn" @click="logout()">Logout</a>
     </b-container>
   </div>
 </template>
@@ -191,32 +186,39 @@
 
 <style scoped>
   .rsvp {
-    background-color: #d69d8b;
+    /* Yellows */
+    background-color: #f1ab88;
+    /* background-color: #e5c26a; */
+    /* background-color: #bb9336; */
+    /* background-color: #d09425; */
+    /* background-color: #e2b941; */
+    /* BluesGreens */
+    /* background-color: #01777e; */
+    /* background-color: #35624a; */
+    /* background-color: #234341; */
+    /* Pink */
+    /* background-color: #d1a08d; */
+  }
+  .welcome {
+    background-color: black;
   }
   .title {
-    font-size: 3rem;
+    font-size: 4rem;
     margin: 0;
     font-family: sans-serif;
-    border-bottom: 5px dotted white;
   }
   .subtitle {
-    color: rgba(255, 255, 255, 0.814);
-    letter-spacing: 2px;
-    font-size: 1.3rem;
-    border-bottom: none;
+    color: rgba(255, 255, 255, 0.738);
+    line-height: 2rem;
+    font-size: 2rem;
+    font-family: sans-serif;
   }
-  .page-header {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-  }
+
   .success {
     font-size: 1.5rem;
     padding: 1rem;
   }
-  .btn {
-    margin-top: 1rem;
-    width: 100%;
-  }
+
   .guestForm {
     margin-top: 1rem;
   }
@@ -227,9 +229,5 @@
     border: 2px solid white;
     border-radius: 0.25rem;
     margin-top: 0.5rem;
-  }
-  a.btn {
-    color: white;
-    margin-top: 1rem;
   }
 </style>

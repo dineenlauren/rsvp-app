@@ -48,7 +48,7 @@
 
 <style scoped>
   .wedding {
-    background-color: #b59668;
+    background-color: #35624a;
   }
 
   ul.timeline {
@@ -77,7 +77,7 @@
   /* Timeline Circles */
   ul.timeline > li:before {
     content: ' ';
-    background: #b59668;
+    background: white;
     display: inline-block;
     position: absolute;
     border-radius: 50%;

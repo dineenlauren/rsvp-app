@@ -6,13 +6,13 @@
     </header>
     <!-- DETAILS SECTION -->
     <b-container>
-      <b-row class="justify-content-md-center red">
+      <b-row class="justify-content-md-center">
         <b-col lg="7"
           ><router-link class="router-btn" :to="'rsvp'"
             >RSVP</router-link
           ></b-col
         >
-        <b-col lg="7" class="blue">
+        <b-col lg="7">
           <p class="subheading">When</p>
           <p>September 8th, 2019</p>
           <p>4:00pm</p>

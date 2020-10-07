@@ -1,119 +1,254 @@
 <template>
-  <div class="about">
+  <div class="rsvp">
     <!-- PAGE TITLE -->
-    <header>
-      <Welcome :subTitle="subTitle" :title="title" />
+    <header class="page-header">
+      <b-container fluid>
+        <b-row class="justify-content-md-center">
+          <b-col lg="7">
+            <h1 v-if="!userProfile.guest" class="title">
+              {{ userProfile.name }} {{ userProfile.nameLast }}
+            </h1>
+            <h1 v-else class="title">
+              {{ userProfile.name }} & {{ userProfile.guest }}
+              <h1 class="subtitle t-align-end">
+                you have been cordially invited
+              </h1>
+            </h1>
+          </b-col>
+        </b-row>
+      </b-container>
     </header>
-    <!-- DETAILS SECTION -->
-    <b-container>
-      <b-row class="justify-content-md-center">
-        <b-col lg="7">
-          <b-form v-if="showLoginForm" @submit.prevent>
-            <b-row cols="1">
-              <b-col class="mb-2">
-                <b-form-input
-                  id="email1"
-                  v-model.trim="loginForm.email"
-                  type="text"
-                  required
-                  placeholder="Username"
-                ></b-form-input>
-              </b-col>
-              <b-col>
-                <b-form-input
-                  id="password1"
-                  v-model.trim="loginForm.password"
-                  type="password"
-                  required
-                  placeholder="Password"
-                ></b-form-input>
-              </b-col>
 
-              <b-col class="mt-3"
-                ><p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p>
-                <button @click="login()" class="router-btn">Log In</button>
-                <div>
-                  <a type="button" class="btn" @click="toggleForm()">
-                    Create an Account
-                  </a>
-                </div>
-              </b-col>
-            </b-row>
+    <!-- Update RSVP Status -->
+    <b-container class="form-wrapper">
+      <b-row class="justify-content-sm-center form-border">
+        <b-col>
+          <h2 class="form-title">RSVP</h2>
+
+          <b-form @submit.prevent="updateProfile()">
+            <b-form-group
+              label-cols-sm="4"
+              label-align-sm="right"
+              :label="userProfile.name + ' ' + userProfile.nameLast + ':'"
+            >
+              <b-form-select
+                id="status"
+                v-model="userProfile.status"
+                :options="options"
+                required
+              >
+              </b-form-select>
+            </b-form-group>
+            <b-form-group
+              label-cols-sm="4"
+              label-align-sm="right"
+              :label="userProfile.guest + ' ' + userProfile.guestLast + ':'"
+            >
+              <b-form-select
+                id="status"
+                v-model="userProfile.status2"
+                :options="options"
+                required
+              >
+              </b-form-select>
+              <a
+                v-if="userProfile.guest"
+                type="button"
+                class="btn"
+                @click="removeGuest"
+                ><b-icon icon="x-circle"></b-icon>Remove Guest
+              </a>
+            </b-form-group>
+
+            <!-- TOGGLE GUEST INPUT FORM -->
+            <div v-if="!userProfile.noGuest && !userProfile.guest">
+              <a v-if="!showGuestForm" type="button" @click="toggleForm">
+                <b-icon icon="plus-circle-fill"></b-icon> Guest</a
+              >
+
+              <a v-if="showGuestForm" type="button" @click="toggleForm"
+                ><b-icon icon="dash-circle"></b-icon> Guest</a
+              >
+              <b-form-group v-if="showGuestForm" class="guestForm">
+                <b-form-input
+                  id="guest"
+                  v-model="addGuest.guest"
+                  placeholder="First Name"
+                ></b-form-input>
+                <b-form-input
+                  id="guestLast"
+                  v-model="addGuest.guestLast"
+                  placeholder="Last Name"
+                ></b-form-input>
+                <button @click.prevent="updateGuest()">
+                  <b-icon icon="plus-circle-fill"></b-icon>
+                  Add
+                </button>
+              </b-form-group>
+            </div>
+            <button block type="submit" class="btn btn-secondary">
+              Submit RSVP
+            </button>
+            <div>
+              <a type="button" class="btn" @click="logout()">
+                Logout
+              </a>
+            </div>
           </b-form>
         </b-col>
       </b-row>
+      <!-- Success Message -->
+      <transition name="fade">
+        <p v-if="showSuccess" class="success t-center">
+          Thank you. Your RSVP has been updated.
+        </p>
+      </transition>
     </b-container>
   </div>
 </template>
 
 <script>
   import Welcome from '../components/Welcome';
+  import { mapState } from 'vuex';
+  import {
+    BIcon,
+    BIconXCircle,
+    BIconPlusCircleFill,
+    BIconDashCircle,
+  } from 'bootstrap-vue';
 
   export default {
     name: 'Temp',
-    components: { Welcome },
+    components: {
+      Welcome,
+      BIcon,
+      BIconXCircle,
+      BIconPlusCircleFill,
+      BIconDashCircle,
+    },
+
     data() {
       return {
-        loginForm: {
-          email: '',
-          password: '',
+        name: '',
+        nameLast: '',
+        guest: '',
+        guestLast: '',
+        status: '',
+        status2: '',
+        addGuest: {
+          guest: '',
+          guestLast: '',
         },
-        signupForm: {
-          name: '',
-          nameLast: '',
-          guest: null,
-          guestLast: null,
-          email: '',
-          password: '',
-          noGuest: false,
-          isAdmin: false,
-        },
-        showLoginForm: true,
-        subTitle: 'To RSVP',
-        title: 'Login',
-        errorMsg: '',
+        options: [
+          { text: 'Select One', value: null, disabled: true },
+          'Attending',
+          'Not Attending',
+        ],
+        showSuccess: false,
+        showGuestForm: false,
       };
+    },
+    computed: {
+      ...mapState(['userProfile']),
     },
     methods: {
       toggleForm() {
-        this.showLoginForm = !this.showLoginForm;
+        this.showGuestForm = !this.showGuestForm;
       },
-
-      login() {
-        this.$store
-          .dispatch('login', {
-            email: this.loginForm.email,
-            password: this.loginForm.password,
-          })
-          .catch((err) => {
-            console.warn(err);
-            this.errorMsg = err.message;
-          });
+      logout() {
+        this.$store.dispatch('logout');
       },
-      signup() {
-        this.$store.dispatch('signup', {
-          name: this.signupForm.name,
-          nameLast: this.signupForm.nameLast,
-          guest: this.signupForm.guest,
-          guestLast: this.signupForm.guestLast,
-          email: this.signupForm.email,
-          password: this.signupForm.password,
-          noGuest: this.signupForm.noGuest,
-          isAdmin: this.signupForm.isAdmin,
+      updateGuest() {
+        this.$store.dispatch('updateGuest', {
+          guest: this.addGuest.guest,
+          guestLast: this.addGuest.guestLast,
         });
+        this.showGuestForm = false;
+      },
+      removeGuest() {
+        this.$store.dispatch('updateGuest', {
+          guest: '',
+          guestLast: '',
+          status2: null,
+        });
+        this.showGuestForm = false;
+      },
+      updateProfile() {
+        this.$store.dispatch('updateProfile', {
+          status: this.userProfile.status,
+          status2: this.userProfile.status2,
+          guest: this.userProfile.guest,
+          guestLast: this.userProfile.guestLast,
+        });
+        this.showSuccess = true;
+
+        setTimeout(() => {
+          this.showSuccess = false;
+        }, 3000);
       },
     },
   };
 </script>
 
 <style scoped>
-  .about {
-    background-color: #bf5650;
+  .rsvp {
+    text-align: center;
   }
-  div.col-lg-7 {
+
+  .page-header {
+    padding: 5rem 0;
+    background-color: #f1ab88;
+  }
+  .title {
+    font-size: 4rem;
+    font-family: tilda-grande, sans-serif;
+  }
+  .subtitle {
+    color: rgba(255, 255, 255, 0.738);
+    line-height: 1rem;
+    font-family: tilda-grande, sans-serif;
+  }
+  .form-wrapper {
+    color: black;
+    border-radius: 3px;
+    border: 1px solid #fafafa;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+    margin-top: -3rem;
+    padding: 2rem;
+    background: white;
+    max-width: 720px !important;
+  }
+  .form-border {
+    padding: 15px;
+    border: solid 1.5px black;
+    margin: 0;
+  }
+  .form-title {
+    letter-spacing: 2.3rem;
+    font-family: serif;
+    border-bottom: 2px solid black;
+  }
+
+  .success {
+    font-size: 1.5rem;
     padding: 1rem;
   }
-  form {
-    max-width: 75%;
+  .guestForm {
+    margin-top: 1rem;
   }
+  .guestForm button {
+    color: white;
+    background-color: #e17534;
+    border: 2px solid white;
+    border-radius: 0.25rem;
+    margin-top: 0.5rem;
+  }
+  a.btn {
+    color: black;
+  }
+  /* @media (min-width: 768px) {
+    .container {
+      max-width: 70%;
+    }
+  } */
 </style>

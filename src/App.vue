@@ -85,9 +85,6 @@
   a.btn:hover {
     color: white;
   }
-  form {
-    max-width: 400px;
-  }
 
   .t-center {
     text-align: center;
@@ -103,12 +100,25 @@
     font-size: 1.2rem;
     text-transform: uppercase;
   }
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     .container {
       max-width: 70%;
     }
-  }
+  } */
   /* TEMP STYLING */
+
+  /* Yellows */
+  /* background-color: #f1ab88; */
+  /* background-color: #e5c26a; */
+  /* background-color: #bb9336; */
+  /* background-color: #d09425; */
+  /* background-color: #e2b941; */
+  /* BluesGreens */
+  /* background-color: #01777e; */
+  /* background-color: #35624a; */
+  /* background-color: #234341; */
+  /* Pink */
+  /* background-color: #d1a08d; */
   .red {
     background-color: rgba(255, 0, 0, 0.411);
   }

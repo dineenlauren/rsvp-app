@@ -1,24 +1,30 @@
 <template>
   <div class="rsvp">
     <!-- PAGE TITLE -->
-    <b-container>
-      <b-row class="justify-content-md-center welcome">
-        <b-col lg="7">
-          <p class="subtitle t-align-end">{{ subTitle }}</p>
-          <h1 v-if="!userProfile.guest" class="title">
-            {{ userProfile.name }}
-          </h1>
-          <h1 v-else class="title">
-            {{ userProfile.name }} & {{ userProfile.guest }}
-          </h1>
-        </b-col>
-      </b-row>
-    </b-container>
+    <header class="page-header t-center">
+      <b-container fluid>
+        <b-row class="justify-content-md-center">
+          <b-col lg="7">
+            <h1 v-if="!userProfile.guest" class="title">
+              {{ userProfile.name }} {{ userProfile.nameLast }}
+            </h1>
+            <h1 v-else class="title">
+              {{ userProfile.name }} & {{ userProfile.guest }}
+              <h1 class="subtitle t-align-end">
+                you have been cordially invited
+              </h1>
+            </h1>
+          </b-col>
+        </b-row>
+      </b-container>
+    </header>
 
-    <b-container>
-      <!-- Update RSVP Status -->
-      <b-row class="justify-content-md-center">
-        <b-col lg="7">
+    <!-- Update RSVP Status -->
+    <b-container class="form-wrapper">
+      <b-row class="justify-content-sm-center form-border">
+        <b-col>
+          <h2 class="form-title t-center">RSVP</h2>
+
           <b-form @submit.prevent="updateProfile()">
             <b-form-group
               :label="userProfile.name + ' ' + userProfile.nameLast + ':'"
@@ -31,28 +37,26 @@
               >
               </b-form-select>
             </b-form-group>
-            <div v-if="userProfile.guest">
-              <b-form-group
-                ><a
-                  v-if="userProfile.guest"
-                  type="button"
-                  @click="removeGuest"
-                  id="tooltip-1"
-                >
-                  <b-icon icon="x-circle"></b-icon> </a
-                ><b-tooltip target="tooltip-1" triggers="hover">
-                  Remove Guest
-                </b-tooltip>
-                {{ userProfile.guest }} {{ userProfile.guestLast }}:
-                <b-form-select
-                  id="status"
-                  v-model="userProfile.status2"
-                  :options="options"
-                  required
-                >
-                </b-form-select>
-              </b-form-group>
-            </div>
+            <b-form-group
+              v-if="userProfile.guest"
+              :label="userProfile.guest + ' ' + userProfile.guestLast + ':'"
+            >
+              <b-form-select
+                id="status"
+                v-model="userProfile.status2"
+                :options="options"
+                required
+              >
+              </b-form-select>
+              <a
+                v-if="userProfile.guest"
+                type="button"
+                class="btn"
+                @click="removeGuest"
+                ><b-icon icon="x-circle"></b-icon>Remove Guest
+              </a>
+            </b-form-group>
+
             <!-- TOGGLE GUEST INPUT FORM -->
             <div v-if="!userProfile.noGuest && !userProfile.guest">
               <a v-if="!showGuestForm" type="button" @click="toggleForm">
@@ -82,14 +86,14 @@
             <button block type="submit" class="btn btn-secondary">
               Submit RSVP
             </button>
-            <div>
-              <a type="button" class="btn" @click="logout()">
-                Logout
-              </a>
-            </div>
           </b-form>
         </b-col>
       </b-row>
+      <div class="t-center">
+        <a type="button" class="btn " @click="logout()">
+          Logout
+        </a>
+      </div>
       <!-- Success Message -->
       <transition name="fade">
         <p v-if="showSuccess" class="success t-center">
@@ -185,44 +189,47 @@
 </script>
 
 <style scoped>
-  .rsvp {
-    /* Yellows */
+  .page-header {
+    padding: 5rem 0;
     background-color: #f1ab88;
-    /* background-color: #e5c26a; */
-    /* background-color: #bb9336; */
-    /* background-color: #d09425; */
-    /* background-color: #e2b941; */
-    /* BluesGreens */
-    /* background-color: #01777e; */
-    /* background-color: #35624a; */
-    /* background-color: #234341; */
-    /* Pink */
-    /* background-color: #d1a08d; */
-  }
-  .welcome {
-    background-color: black;
   }
   .title {
     font-size: 4rem;
-    margin: 0;
-    font-family: sans-serif;
+    font-family: tilda-grande, sans-serif;
   }
   .subtitle {
     color: rgba(255, 255, 255, 0.738);
-    line-height: 2rem;
-    font-size: 2rem;
-    font-family: sans-serif;
+    line-height: 1rem;
+    font-family: tilda-grande, sans-serif;
+  }
+  .form-wrapper {
+    color: black;
+    border-radius: 3px;
+    border: 1px solid #fafafa;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+    margin-top: -3rem;
+    padding: 2rem;
+    background: white;
+    max-width: 720px !important;
+  }
+  .form-border {
+    padding: 15px;
+    border: solid 1.5px black;
+    margin: 0;
+  }
+  .form-title {
+    letter-spacing: 2.3rem;
+    font-family: serif;
+    border-bottom: 2px solid black;
   }
 
   .success {
     font-size: 1.5rem;
     padding: 1rem;
   }
-
   .guestForm {
     margin-top: 1rem;
   }
-
   .guestForm button {
     color: white;
     background-color: #e17534;
@@ -230,4 +237,20 @@
     border-radius: 0.25rem;
     margin-top: 0.5rem;
   }
+  button {
+    width: 100%;
+  }
+
+  a.btn {
+    color: rgb(122, 122, 122);
+  }
+
+  a.btn:hover {
+    color: rgb(0, 0, 0);
+  }
+  /* @media (min-width: 768px) {
+    .container {
+      max-width: 70%;
+    }
+  } */
 </style>

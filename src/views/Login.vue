@@ -202,6 +202,10 @@
     background-color: #b73e00;
   }
 
+  form {
+    max-width: 400px;
+  }
+
   input {
     margin: 5px 0;
   }

@@ -22,8 +22,8 @@
 <style>
   #app {
     flex: 1 0 auto;
-    color: white;
     font-size: 1.3rem;
+    color: white;
   }
   #nav {
     padding: 30px;

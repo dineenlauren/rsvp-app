@@ -9,8 +9,6 @@
           <b-nav-item to="/wedding">Wedding</b-nav-item>
           <b-nav-item to="/registry">Registry</b-nav-item>
           <b-nav-item to="/rsvp">RSVP</b-nav-item>
-
-          <!-- <b-nav-item @click="logout()">logout</b-nav-item> -->
         </b-navbar-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto"></b-navbar-nav>

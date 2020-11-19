@@ -77,33 +77,6 @@ const router = new VueRouter({
   ],
 });
 
-// navigation guard to check for logged in users
-// router.beforeEach((to, from, next) => {
-//   const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
-
-//   if (requiresAuth && !auth.currentUser) {
-//     next('/login');
-//   } else {
-//     next();
-//   }
-// });
-
-//from rd-wedding
-// router.beforeEach((to, from, next) => {
-//   const currentUser = auth.currentUser;
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (!currentUser) {
-//       next({
-//         path: '/login',
-//       });
-//     } else {
-//       next();
-//     }
-//   } else {
-//     next();
-//   }
-// });
-
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
   const currentUser = auth.currentUser;

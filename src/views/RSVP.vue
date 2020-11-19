@@ -191,7 +191,7 @@
 <style scoped>
   .page-header {
     padding: 5rem 0;
-    background-color: #f1ab88;
+    background-color: black;
   }
   .title {
     font-size: 4rem;

@@ -22,23 +22,3 @@
     name: 'SiteNav',
   };
 </script>
-
-<style scoped>
-  a.nav-link {
-    text-transform: uppercase !important;
-    font-size: 20px !important;
-    border: solid 1px rgba(255, 255, 255, 0) !important;
-  }
-  a.nav-link:hover {
-    color: black !important;
-    border-top: solid 1px black !important;
-    border-bottom: solid 1px black !important;
-  }
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-  #nav a.router-link-exact-active {
-    color: #81948b;
-  }
-</style>

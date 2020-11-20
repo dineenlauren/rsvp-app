@@ -10,9 +10,9 @@
             </h1>
             <h1 v-else class="title">
               {{ userProfile.name }} & {{ userProfile.guest }}
-              <h1 class="subtitle t-align-end">
-                you have been cordially invited
-              </h1>
+            </h1>
+            <h1 class="subtitle t-align-end">
+              you have been cordially invited
             </h1>
           </b-col>
         </b-row>
@@ -105,7 +105,6 @@
 </template>
 
 <script>
-  import Welcome from '../components/Welcome';
   import { mapState } from 'vuex';
   import {
     BIcon,
@@ -117,7 +116,6 @@
   export default {
     name: 'rsvp',
     components: {
-      Welcome,
       BIcon,
       BIconXCircle,
       BIconPlusCircleFill,
@@ -187,70 +185,3 @@
     },
   };
 </script>
-
-<style scoped>
-  .page-header {
-    padding: 5rem 0;
-    background-color: black;
-  }
-  .title {
-    font-size: 4rem;
-    font-family: tilda-grande, sans-serif;
-  }
-  .subtitle {
-    color: rgba(255, 255, 255, 0.738);
-    line-height: 1rem;
-    font-family: tilda-grande, sans-serif;
-  }
-  .form-wrapper {
-    color: black;
-    border-radius: 3px;
-    border: 1px solid #fafafa;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
-    margin-top: -3rem;
-    padding: 2rem;
-    background: white;
-    max-width: 720px !important;
-  }
-  .form-border {
-    padding: 15px;
-    border: solid 1.5px black;
-    margin: 0;
-  }
-  .form-title {
-    letter-spacing: 2.3rem;
-    font-family: serif;
-    border-bottom: 2px solid black;
-  }
-
-  .success {
-    font-size: 1.5rem;
-    padding: 1rem;
-  }
-  .guestForm {
-    margin-top: 1rem;
-  }
-  .guestForm button {
-    color: white;
-    background-color: #e17534;
-    border: 2px solid white;
-    border-radius: 0.25rem;
-    margin-top: 0.5rem;
-  }
-  button {
-    width: 100%;
-  }
-
-  a.btn {
-    color: rgb(122, 122, 122);
-  }
-
-  a.btn:hover {
-    color: rgb(0, 0, 0);
-  }
-  /* @media (min-width: 768px) {
-    .container {
-      max-width: 70%;
-    }
-  } */
-</style>

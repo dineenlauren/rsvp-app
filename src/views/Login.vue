@@ -2,7 +2,7 @@
   <div id="login">
     <!-- PAGE TITLE -->
     <header>
-      <Welcome :subTitle="subTitle" :title="title" />
+      <PageHeader :subTitle="subTitle" :title="title" />
     </header>
 
     <!-- LOGIN FORM -->
@@ -139,11 +139,11 @@
 </template>
 
 <script>
-  import Welcome from '../components/Welcome';
+  import PageHeader from '../components/PageHeader';
 
   export default {
     name: 'Login',
-    components: { Welcome },
+    components: { PageHeader },
     data() {
       return {
         loginForm: {
@@ -197,16 +197,3 @@
     },
   };
 </script>
-<style scoped>
-  #login {
-    background-color: #b73e00;
-  }
-
-  form {
-    max-width: 400px;
-  }
-
-  input {
-    margin: 5px 0;
-  }
-</style>

@@ -2,7 +2,7 @@
   <div class="registry">
     <!-- PAGE TITLE -->
     <header>
-      <Welcome :subTitle="subTitle" :title="title" />
+      <PageHeader :subTitle="subTitle" :title="title" />
     </header>
     <!-- DETAILS SECTION -->
     <b-container class="t-center">
@@ -55,10 +55,10 @@
 </template>
 
 <script>
-  import Welcome from '../components/Welcome';
+  import PageHeader from '../components/PageHeader';
   export default {
     name: 'Registry',
-    components: { Welcome },
+    components: { PageHeader },
     data() {
       return {
         cb: 'https://www.crateandbarrel.com/gift-registry/#',
@@ -71,36 +71,3 @@
     },
   };
 </script>
-
-<style scoped>
-  .registry {
-    background-color: #d09425;
-  }
-
-  p {
-    color: #d0591c;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  .subheading {
-    font-weight: 200;
-    font-size: 2rem;
-  }
-  .col-style {
-    border: 2px solid white;
-    background-color: #e2b941;
-    padding: 2rem 1rem;
-    margin: 1rem;
-  }
-  .col-style:hover {
-    text-decoration: none;
-    background-color: #d0591c;
-  }
-  .col-style:hover > .subheading {
-    color: white;
-  }
-  .col-style:hover > p {
-    color: #ffd558;
-  }
-</style>

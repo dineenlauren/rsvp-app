@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "sh deploy.sh"
+    "deploy": "sh deploy.sh",
+    "build-report": "vue-cli-service build --report"
   },
   "dependencies": {
     "bootstrap-vue": "^2.16.0",

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import RSVP from '../views/RSVP.vue';
-import Admin from '../views/Admin.vue';
 import { auth } from '../firebase';
 
 Vue.use(VueRouter);
@@ -30,25 +29,10 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/admin',
-      name: 'Admin',
-      component: Admin,
-      meta: {
-        requiresAuth: true,
-        title: 'Admin',
-      },
-    },
-    {
       path: '/login',
       name: 'Login',
       component: () =>
         import(/* webpackChunkName: "login" */ '../views/Login.vue'),
-    },
-    {
-      path: '/signup',
-      name: 'SignUp',
-      component: () =>
-        import(/* webpackChunkName: "signup" */ '../views/SignUp.vue'),
     },
     {
       path: '/about',
@@ -56,12 +40,7 @@ const router = new VueRouter({
       component: () =>
         import(/* webpackChunkName: "about" */ '../views/About.vue'),
     },
-    {
-      path: '/temp',
-      name: 'temp',
-      component: () =>
-        import(/* webpackChunkName: "testing" */ '../views/temp.vue'),
-    },
+
     {
       path: '/wedding',
       name: 'Wedding',

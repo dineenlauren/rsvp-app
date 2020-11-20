@@ -2,16 +2,14 @@
   <div class="about">
     <!-- PAGE TITLE -->
     <header>
-      <Welcome :subTitle="subTitle" :title="title" />
+      <PageHeader :subTitle="subTitle" :title="title" />
     </header>
     <!-- DETAILS SECTION -->
     <b-container>
       <b-row class="justify-content-md-center">
-        <b-col lg="7"
-          ><router-link class="router-btn" :to="'rsvp'"
-            >RSVP</router-link
-          ></b-col
-        >
+        <b-col lg="7">
+          <router-link class="router-btn" :to="'rsvp'">RSVP</router-link>
+        </b-col>
         <b-col lg="7">
           <p class="subheading">When</p>
           <p>September 8th, 2019</p>
@@ -54,11 +52,11 @@
 </template>
 
 <script>
-  import Welcome from '../components/Welcome';
+  import PageHeader from '../components/PageHeader';
 
   export default {
     name: 'About',
-    components: { Welcome },
+    components: { PageHeader },
     data() {
       return {
         subTitle: 'Wedding',
@@ -67,12 +65,3 @@
     },
   };
 </script>
-
-<style>
-  .about {
-    background-color: #bf5650;
-  }
-  div.col-lg-7 {
-    padding: 1rem;
-  }
-</style>

@@ -26,16 +26,4 @@
     background-size: cover;
     padding: 70px 10px;
   }
-  h1 {
-    text-transform: uppercase;
-    letter-spacing: 0.5rem !important;
-    font-family: serif;
-    font-size: 2rem;
-  }
-
-  p {
-    font-size: 1.5rem;
-    letter-spacing: 0.1rem;
-    font-family: serif;
-  }
 </style>

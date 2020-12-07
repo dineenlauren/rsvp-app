@@ -4,7 +4,7 @@
       <div id="nav">
         <SiteNav />
       </div>
-      <router-view class="content2" />
+      <router-view class="content" />
     </div>
   </div>
 </template>

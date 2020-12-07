@@ -2,7 +2,7 @@
   <div class="wedding">
     <!-- PAGE TITLE -->
     <header>
-      <Welcome :subTitle="subTitle" :title="title" />
+      <PageHeader :subTitle="subTitle" :title="title" />
     </header>
 
     <b-container class="mb-5">
@@ -32,11 +32,11 @@
 </template>
 
 <script>
-  import Welcome from '../components/Welcome';
+  import PageHeader from '../components/PageHeader';
 
   export default {
     name: 'Wedding',
-    components: { Welcome },
+    components: { PageHeader },
     data() {
       return {
         subTitle: 'Wedding',
@@ -45,47 +45,3 @@
     },
   };
 </script>
-
-<style scoped>
-  .wedding {
-    background-color: #35624a;
-  }
-
-  ul.timeline {
-    list-style-type: none;
-    position: relative;
-  }
-
-  /* Timeline Verticle Line */
-  ul.timeline:before {
-    content: ' ';
-    background: white;
-    display: inline-block;
-    position: absolute;
-    left: 27px;
-    width: 1px;
-    height: 100%;
-    z-index: 400;
-  }
-
-  /* List Items */
-  ul.timeline > li {
-    margin: 30px 0;
-    padding-left: 10px;
-  }
-
-  /* Timeline Circles */
-  ul.timeline > li:before {
-    content: ' ';
-    background: white;
-    display: inline-block;
-    position: absolute;
-    border-radius: 50%;
-    border: 2px solid white;
-    margin: 8px 0;
-    left: 20px;
-    width: 15px;
-    height: 15px;
-    z-index: 400;
-  }
-</style>

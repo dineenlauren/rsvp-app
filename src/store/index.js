@@ -39,8 +39,7 @@ const store = new Vuex.Store({
         guestLast: form.guestLast,
         status: null,
         status2: null,
-        noGuest: form.noGuest,
-        isAdmin: form.isAdmin,
+        // noGuest: form.noGuest,
       });
 
       dispatch('fetchUserProfile', user);

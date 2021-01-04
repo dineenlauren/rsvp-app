@@ -105,7 +105,7 @@
               ></b-form-input>
             </b-form-group>
 
-            <b-form-checkbox
+            <!-- <b-form-checkbox
               id="checkbox-guest"
               v-model="signupForm.noGuest"
               name="checkbox-guest"
@@ -113,16 +113,7 @@
               unchecked-value="false"
             >
               No +One
-            </b-form-checkbox>
-            <b-form-checkbox
-              id="checkbox-admin"
-              v-model="signupForm.isAdmin"
-              name="checkbox-admin"
-              value="true"
-              unchecked-value="false"
-            >
-              Is Admin
-            </b-form-checkbox>
+            </b-form-checkbox> -->
 
             <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p>
             <button @click="signup()" class="router-btn">Sign Up</button>
